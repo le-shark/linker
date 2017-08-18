@@ -1,0 +1,70 @@
+@import 'purecss';
+
+$twilight-lavender: #8d3b72;
+$pomp-and-power: #8a7090;
+$shiny-shamrock: #62a87c;
+$pastel-green: #81e979;
+$pale-blue: #72e1d1;
+$bg-gray: #f7f7f7;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
+.sidebar {
+  -webkit-box-shadow: -15px 0px 24px 7px rgba(0,0,0,0.5);
+  -moz-box-shadow: -15px 0px 24px 7px rgba(0,0,0,0.5);
+  box-shadow: -15px 0px 24px 7px rgba(0,0,0,0.5);
+  height: 100vh;
+  z-index: 99;
+  font-size: 14px;
+}
+
+.main {
+  background-color: $bg-gray;
+}
+
+.logo {
+  display: inline-block;
+  font-size: xx-large;
+  font-family: 'PT Sans Caption', sans-serif;
+}
+
+.logo-sign {
+  display: inline-block;
+  width: 23px;
+}
+
+.sidebar-name {
+  font-size: 25px;
+}
+
+.sidebar-karma {
+  font-size: large;
+  font-weight: bolder;
+  display: inline;
+  margin: 0;
+}
+
+.sidebar-main {
+  padding-left: 20px;
+}

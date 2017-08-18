@@ -1,0 +1,12 @@
+<%= content_for :sidebar do %>
+  <div class="sidebar-main">
+    <p class="sidebar-name" title="<%= @user.created_at %>"><%= @user.username %></p>
+    <p>
+      <span class="sidebar-karma">42</span> post karma
+    </p>
+    <p>
+      <span class="sidebar-karma">88</span> comment karma
+    </p>
+    <p>registered <%= time_ago_in_words @user.created_at %> ago</p>
+  </div>
+<% end %>

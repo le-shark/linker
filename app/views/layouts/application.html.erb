@@ -1,14 +1,29 @@
+<%# Apparently it is possible to provide data to yields based on controller %>
+
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Linker</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= render 'head' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="content pure-g">
+      <div class="pure-u-1-6 sidebar">
+        <center>
+          <%= image_tag "logo.png", class: "logo-sign" %>
+          <p class="logo">linker</p>
+        </center>
+        <%= yield :sidebar %>
+      </div>
+      <div class="main pure-u-5-6">
+        <header>
+          <%= yield :header %>
+          <%= render 'user_header' %>
+        </header>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>

@@ -6,6 +6,7 @@ $shiny-shamrock: #62a87c;
 $pastel-green: #81e979;
 $pale-blue: #72e1d1;
 $bg-gray: #f7f7f7;
+$text-color: #222;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -15,19 +16,12 @@ $bg-gray: #f7f7f7;
 
 html, body {
   height: 100%;
+  color: $text-color;
 }
 
 html, button, input, select, textarea,
 .pure-g [class *= "pure-u"] {
     font-family: "Source Sans Pro", sans-serif;
-}
-
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
 }
 
 .sidebar {
@@ -37,6 +31,10 @@ html, button, input, select, textarea,
   height: 100vh;
   z-index: 99;
   font-size: 14px;
+  a {
+    color: $text-color;
+    text-decoration: none;
+  }
 }
 
 .main {
@@ -67,4 +65,44 @@ html, button, input, select, textarea,
 
 .sidebar-main {
   padding-left: 20px;
+}
+
+.header {
+  overflow: auto;
+  padding: 0 70px;
+  p {
+    display: inline-block;
+    margin-top: 40px;
+  }
+  .left {
+    font-size: x-large;
+  }
+}
+
+.content {
+  padding: 0 70px;
+}
+
+.user-header {
+  float: right;
+}
+
+.user-page {
+  img, h2, p {
+    display: inline-block;
+  }
+
+  h2, p {
+    margin: 0 20px;
+  }
+
+  hr {
+    margin: 8px 20px;
+    color: #EEE;
+  }
+
+  img {
+    float: left;
+    border-radius: 10px;
+  }
 }

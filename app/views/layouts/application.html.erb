@@ -9,20 +9,26 @@
   </head>
 
   <body>
-    <div class="content pure-g">
+    <div class="pure-g">
       <div class="pure-u-1-6 sidebar">
         <center>
-          <%= image_tag "logo.png", class: "logo-sign" %>
-          <p class="logo">linker</p>
+          <a href="#">
+            <%= image_tag "logo.png", class: "logo-sign" %>
+            <p class="logo">linker</p>
+          </a>
         </center>
         <%= yield :sidebar %>
       </div>
       <div class="main pure-u-5-6">
-        <header>
+        <div class="header">
           <%= yield :header %>
-          <%= render 'user_header' %>
-        </header>
-        <%= yield %>
+          <div class="user-header">
+            <%= render 'user_header' %>
+          </div>
+        </div>
+        <div class="content">
+          <%= yield %>
+        </div>
       </div>
     </div>
   </body>

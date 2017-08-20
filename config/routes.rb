@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   get 'users/show'
 
-  resources :users
+  resources :u, controller: 'users'
 end

@@ -1,3 +1,20 @@
 <% content_for :header do %>
   <p class="left">Sign up</p>
 <% end %>
+<%= form_for @user, url: signup_path, html: { class: 'pure-form pure-form-stacked' } do |f| %>
+  <%= render 'shared/error_messages' %>
+
+  <%= f.label :username, class: 'hover-tip', title: "Only letters, underscores and hyphens" %>
+  <%= f.text_field :username, placeholder: "Username", title: "Only letters, underscores and hyphens" %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, placeholder: "E-mail" %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, placeholder: "Password" %>
+
+  <%= f.label :password_confirmation, "Confirm your password" %>
+  <%= f.password_field :password_confirmation, placeholder: "Password confirmation" %>
+
+  <%= f.submit "Sign up", class: "pure-button pure-button-primary" %>
+<% end %>

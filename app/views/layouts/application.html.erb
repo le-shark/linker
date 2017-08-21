@@ -27,9 +27,15 @@
           </div>
         </div>
         <div class="content">
+          <% flash.each do |type, msg| %>
+            <div class="pure-alert pure-alert-<%= type %>"><%= msg %></div>
+          <% end %>
           <%= yield %>
         </div>
       </div>
     </div>
   </body>
+  <script>
+    console.log(he.decode(`<%= params %>`));
+  </script>
 </html>

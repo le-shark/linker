@@ -106,3 +106,17 @@ html, button, input, select, textarea,
     border-radius: 10px;
   }
 }
+
+.hover-tip {
+  position: relative;
+  display: inline-block !important;
+}
+
+.hover-tip::after{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px dashed $text-color;
+  content: ""
+}

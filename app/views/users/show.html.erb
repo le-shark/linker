@@ -1,3 +1,7 @@
+<%= provide(:title, "u/#{@user.username}") %>
+<% content_for :header do %>
+  <p class="left">User profile</p>
+<% end %>
 <%= content_for :sidebar do %>
   <div class="sidebar-main">
     <p class="sidebar-name"><%= @user.username %></p>

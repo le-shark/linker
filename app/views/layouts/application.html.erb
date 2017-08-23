@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Linker</title>
+    <title><%= page_title yield(:title) %></title>
     <%= render 'head' %>
   </head>
 
@@ -16,6 +16,7 @@
             <%= image_tag "logo.png", class: "logo-sign" %>
             <p class="logo">linker</p>
           </a>
+          <p class="weekday">It's <%= weekday %>, <span title="and gals, of course">my dudes</span></p>
         </center>
         <%= yield :sidebar %>
       </div>

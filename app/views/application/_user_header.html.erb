@@ -1,1 +1,35 @@
-<p>It's <%= weekday %>, my dudes</p>
+<% if logged_in? %>
+<h4 class="user-header-name">
+<div class="pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item pure-menu-selected pure-menu-has-children pure-menu-allow-hover">
+          <%= link_to current_user, class: "pure-menu-link" do %>
+            <%= gravatar_for(current_user, size: 30, classes: "pure-img-eliptical") %>
+            <span><%= current_user.username %></span>
+          <% end %>
+          <ul class="pure-menu-children">
+              <li class="pure-menu-item"><a href="#" class="pure-menu-link">Settings</a></li>
+              <li class="pure-menu-item"><%= link_to "Log out", logout_path, method: :delete, class: "pure-menu-link" %></li>
+          </ul>
+        </li>
+    </ul>
+</div>
+</h4>
+<% else %>
+  <h4 class="user-header-name not-logged">
+    <div class="pure-menu pure-menu-horizontal">
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item pure-menu-selected pure-menu-has-children pure-menu-allow-hover">
+              <%= link_to current_user, class: "pure-menu-link" do %>
+                <%= image_tag "logo.png", class: "signup-logo" %>
+                <span>Wanna join?</span>
+              <% end %>
+              <ul class="pure-menu-children">
+                  <li class="pure-menu-item"><%= link_to "Sign up", signup_path, class: "pure-menu-link" %></li>
+                  <li class="pure-menu-item"><%= link_to "Log in", login_path, class: "pure-menu-link" %></li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+  </h4>
+<% end %>

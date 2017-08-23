@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       flash[:info] = "Welcome back, #{user.username}!"
       log_in user
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user
     else
       flash.now[:error] = "Invalid username/password. Please try again."
@@ -17,7 +18,7 @@ class SessionsController < ApplicationController
   def destroy
     flash[:info] = "See you!"
     session[:return_to] ||= request.referer
-    log_out
+    log_out if logged_in?
     redirect_to session.delete(:return_to)
   end
 end

@@ -1,0 +1,31 @@
+<% provide(:title, "Edit user") %>
+<% content_for :header do %>
+  <p class="left">Edit your profile</p>
+<% end %>
+
+<%= form_for @user, html: { class: 'pure-form pure-form-stacked' } do |f| %>
+  <%= render 'shared/error_messages' %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+  <%= f.label :about_me, class: 'hover-tip', title: 'No longer than 500 symbols' %>
+  <%= f.text_area :about_me, class: 'form-control' %>
+
+  <%= f.label :new_password %>
+  <%= f.password_field :password, class: 'form-control', value: nil %>
+
+  <%= f.label :password_confirmation, "New password confirmation" %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+  <%= f.submit "Save changes", class: "pure-button pure-button-primary" %>
+<% end %>
+<br>
+<div class="gravatar_edit">
+  <%= gravatar_for @user %>
+  <br>
+  <a class="pure-button pure-button-primary" rel="noopener" href="http://gravatar.com/emails" target="_blank">Change your avatar</a>
+</div>
+<br>
+<%= link_to "Delete your account", @user, class: "button-error pure-button", method: :delete,
+                                       data: { confirm: "You sure? Your account will be deleted forever(!)" } %>

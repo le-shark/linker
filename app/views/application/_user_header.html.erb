@@ -8,7 +8,7 @@
             <span><%= current_user.username %></span>
           <% end %>
           <ul class="pure-menu-children">
-              <li class="pure-menu-item"><a href="#" class="pure-menu-link">Settings</a></li>
+              <li class="pure-menu-item"><%= link_to "Settings", edit_user_path(current_user), class: "pure-menu-link" %></li>
               <li class="pure-menu-item"><%= link_to "Log out", logout_path, method: :delete, class: "pure-menu-link" %></li>
           </ul>
         </li>

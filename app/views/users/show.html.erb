@@ -19,4 +19,8 @@
   <h2>u/<%= @user.username %></h2>
   <hr>
   <p><%= @user.about_me %></p>
+  <% if current_user && current_user.admin? && !current_user?(@user) %>
+    <%= link_to "Delete this user", @user, class: "pure-button button-error", method: :delete,
+                                           data: { confirm: "You sure?" } %>
+  <% end %>
 </div>

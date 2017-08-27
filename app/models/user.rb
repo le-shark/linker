@@ -1,16 +1,21 @@
 class User < ApplicationRecord
+  extend FriendlyId
+  friendly_id :username, use: [:finders, :slugged]
   attr_accessor :remember_token
   attr_readonly :username
   before_save { self.email = self.email.downcase }
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  NAME_REGEX = /^[a-zA-Z0-9\-\_]*$/i
+  NAME_REGEX = /\A[a-zA-Z0-9\-\_]*$\z/i
   validates :username, presence: true, uniqueness: { case_sensitive: false },
-                       length: { maximum: 50 }
+                       length: { maximum: 50 }, format: { with: NAME_REGEX }
   validates :email, presence: true, uniqueness: { case_sensitive: false },
                     length: { maximum: 255 }, format: { with: EMAIL_REGEX }
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   validates :about_me, length: { maximum: 500 }
   has_secure_password
+  has_many :moderations, class_name: 'Moderation',
+                                   foreign_key: 'moderator_id'
+  has_many :moderated_communities, through: :moderations, source: :moderated
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

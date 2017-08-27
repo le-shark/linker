@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170827090745) do
+ActiveRecord::Schema.define(version: 20170827172059) do
+
+  create_table "communities", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_communities_on_slug", unique: true
+  end
+
+  create_table "moderations", force: :cascade do |t|
+    t.integer "moderator_id"
+    t.integer "moderated_id"
+    t.index ["moderated_id"], name: "index_moderations_on_moderated_id"
+    t.index ["moderated_id"], name: "index_moderations_on_moderated_id_and_moderated_id", unique: true
+    t.index ["moderator_id"], name: "index_moderations_on_moderator_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -21,7 +38,9 @@ ActiveRecord::Schema.define(version: 20170827090745) do
     t.text "about_me"
     t.string "remember_digest"
     t.boolean "admin", default: false
+    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 

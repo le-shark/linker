@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170827172059) do
+ActiveRecord::Schema.define(version: 20170828103026) do
 
   create_table "communities", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20170827172059) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.string "title"
     t.index ["slug"], name: "index_communities_on_slug", unique: true
   end
 

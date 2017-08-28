@@ -63,6 +63,7 @@ html, button, input, select, textarea,
 
 .sidebar-name {
   font-size: 25px;
+  margin-bottom: 5px;
 }
 
 .sidebar-karma {
@@ -195,4 +196,9 @@ html, button, input, select, textarea,
 
 .button-secondary {
     background: rgb(66, 184, 221); /* this is a light blue */
+}
+
+.button-lavender {
+  background-color: $twilight-lavender;
+  color: white !important;
 }

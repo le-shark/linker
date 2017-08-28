@@ -1,2 +1,25 @@
-<p><%= @community.name %></p>
-<p><%= @community.description %></p>
+<%= provide(:title, "#{@community.title}") %>
+<% content_for :header do %>
+  <p class="left"><%= @community.title %></p>
+<% end %>
+<%= content_for :sidebar do %>
+  <div class="sidebar-main">
+    <p class="sidebar-name">c/<%= @community.name %></p>
+    <p>4242 subscribers</p>
+    <a href="#" class="pure-button button-lavender">Subscribe</a>
+    <div id="community-desc"></div>
+    <div class="moderators">
+      Community moderators:
+      <ul>
+      <% @community.moderators.each do |m| %>
+        <li><%= link_to "u/#{m.username}", m %></li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
+
+<script>
+    document.getElementById('community-desc').innerHTML =
+      marked(`<%= @community.description %>`);
+</script>

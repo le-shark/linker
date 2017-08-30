@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828103026) do
+ActiveRecord::Schema.define(version: 20170828153409) do
 
   create_table "communities", force: :cascade do |t|
     t.string "name"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20170828103026) do
     t.index ["moderated_id"], name: "index_moderations_on_moderated_id"
     t.index ["moderated_id"], name: "index_moderations_on_moderated_id_and_moderated_id", unique: true
     t.index ["moderator_id"], name: "index_moderations_on_moderator_id"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "type", null: false
+    t.string "title"
+    t.string "link"
+    t.text "text"
+    t.integer "user_id"
+    t.integer "community_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

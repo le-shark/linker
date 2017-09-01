@@ -7,10 +7,12 @@
     <p class="sidebar-name">c/<%= @community.name %></p>
     <p>4242 subscribers</p>
     <a href="#" class="pure-button button-lavender">Subscribe</a>
-    <div id="community-desc"></div>
+    <div class="community-desc markdown">
+      <%= simple_format @community.description %>
+    </div>
     <div class="moderators">
-      Community moderators:
-      <ul>
+      <h4>Community moderators:</h4>
+      <ul class="moderators">
       <% @community.moderators.each do |m| %>
         <li><%= link_to "u/#{m.username}", m %></li>
       <% end %>
@@ -18,8 +20,29 @@
     </div>
   </div>
 <% end %>
-
-<script>
-    document.getElementById('community-desc').innerHTML =
-      marked(`<%= @community.description %>`);
-</script>
+<% @posts.each do |post| %>
+  <div class="post-preview">
+    <% if !post.link? %>
+      <%= link_to post, class: "icon-link" do %>
+        <%= image_tag "text.png", class: "text-icon" %>
+      <% end %>
+    <% elsif !post.image? %>
+    <%= link_to post.link, class: "icon-link" do %>
+      <%= image_tag "link.png", class: "text-icon" %>
+    <% end %>
+    <% else %>
+      <%= link_to post.link, class: "icon-link" do %>
+        <div class="image-icon" style='background-image: url(<%= post.link %>);'></div>
+      <% end %>
+    <% end %>
+    <div class="post-desc">
+      <h3 class="post-title"><%= link_to post.title, post %></h3>
+      <p>submitted <%= time_ago_in_words post.created_at %> ago by
+      <%= link_to post.user do %>
+        <%= gravatar_for(current_user, size: 17, classes: "pure-img-eliptical") %>
+        <%= post.user.username %>
+      <% end %>
+      </p>
+    </div>
+  </div>
+<% end %>

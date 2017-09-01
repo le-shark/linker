@@ -35,8 +35,11 @@
         </div>
       </div>
     </div>
+    <script>
+      console.log(he.decode(`<%= params %>`));
+      document.querySelectorAll('.markdown').forEach((el) => {
+        el.innerHTML = marked(el.innerText);
+      });
+    </script>
   </body>
-  <script>
-    console.log(he.decode(`<%= params %>`));
-  </script>
 </html>

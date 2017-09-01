@@ -8,6 +8,12 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  resources :u, controller: 'users', as: 'users'
-  resources :c, controller: 'communities', as: 'communities'
+  resources :u, controller: 'users', as: 'users' do
+    resources :posts
+  end
+  resources :c, controller: 'communities', as: 'communities' do
+    resources :posts
+  end
+
+  resources :posts
 end

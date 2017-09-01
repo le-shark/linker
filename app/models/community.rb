@@ -4,6 +4,7 @@ class Community < ApplicationRecord
   has_many :moderations, class_name: 'Moderation',
                         foreign_key: 'moderated_id'
   has_many :moderators, through: :moderations
+  has_many :posts
   NAME_REGEX = /\A[a-zA-Z0-9\-\_]*$\z/i
   validates :name, presence: true, uniqueness: { case_sensitive: false },
                        length: { maximum: 50 }, format: { with: NAME_REGEX }

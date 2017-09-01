@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :moderations, class_name: 'Moderation',
                                    foreign_key: 'moderator_id'
   has_many :moderated_communities, through: :moderations, source: :moderated
+  has_many :posts
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

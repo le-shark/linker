@@ -7,6 +7,7 @@ $pastel-green: #81e979;
 $pale-blue: #72e1d1;
 $bg-gray: #f7f7f7;
 $text-color: #222;
+$quite-gray: #424242;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -23,6 +24,11 @@ $text-color: #222;
 html, body {
   height: 100%;
   color: $text-color;
+}
+
+a {
+  color: $twilight-lavender;
+  text-decoration: none;
 }
 
 html, button, input, select, textarea,
@@ -201,4 +207,81 @@ html, button, input, select, textarea,
 .button-lavender {
   background-color: $twilight-lavender;
   color: white !important;
+}
+
+.post-preview {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.text-icon {
+  width: 99px;
+  height: 74px;
+  margin-right: 25px;
+}
+
+.image-icon {
+  display: inline-block;
+  width: 99px;
+  height: 74px;
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-height:100%;
+  background-size: cover;
+  margin-right: 25px;
+}
+
+.post-desc {
+  display: inline-block;
+  p {
+    margin: 0;
+    font-size: small;
+    color: $quite-gray;
+    display: flex;
+    align-items: center;
+    a {
+      margin-left: 5px;
+      display: flex;
+      align-items: center;
+      img {
+        margin-right: 3px;
+      }
+    }
+  }
+}
+
+.post-title {
+  margin: 0;
+  font-weight: 400;
+  a {
+    color: $text-color;
+    text-decoration: none;
+    &:hover {
+      transition: all 0.2s;
+      color: $twilight-lavender;
+    }
+  }
+}
+
+.icon-link {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 74px;
+}
+
+.moderators {
+  margin-top: 5px;
+  padding: 0;
+  list-style: none;
+  a {
+    color: $twilight-lavender;
+  }
+  h4 {
+    margin: 0;
+  }
+  li {
+    margin-bottom: 0;
+  }
 }

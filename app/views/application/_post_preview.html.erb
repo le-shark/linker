@@ -1,0 +1,27 @@
+<div class="post-preview">
+  <% if !post.link? %>
+    <%= link_to post, class: "icon-link" do %>
+      <%= image_tag "text.png", class: "text-icon" %>
+    <% end %>
+  <% elsif !post.image? %>
+  <%= link_to post.link, class: "icon-link" do %>
+    <%= image_tag "link.png", class: "text-icon" %>
+  <% end %>
+  <% else %>
+    <%= link_to post.link, class: "icon-link" do %>
+      <div class="image-icon" style='background-image: url(<%= post.link %>);'></div>
+    <% end %>
+  <% end %>
+  <div class="post-desc">
+    <h3 class="post-title"><%= link_to post.title, post %></h3>
+    <p>submitted <%= time_ago_in_words post.created_at %> ago by
+    <%= link_to post.user do %>
+      <%= gravatar_for(current_user, size: 17, classes: "pure-img-eliptical") %>
+      <%= post.user.username %>
+    <% end %>
+    <% if controller_name != "communities" %>
+      &thinsp;to<%= link_to "c/#{post.community.name}", post.community %>
+    <% end %>
+    </p>
+  </div>
+</div>

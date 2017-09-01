@@ -23,4 +23,10 @@
     <%= link_to "Delete this user", @user, class: "pure-button button-error", method: :delete,
                                            data: { confirm: "You sure?" } %>
   <% end %>
+  <div class="user-posts pure-u-24-24">
+    <hr>
+    <% @user.posts.reverse.each do |post| %>
+      <%= render 'post_preview', post: post %>
+    <% end %>
+  </div>
 </div>

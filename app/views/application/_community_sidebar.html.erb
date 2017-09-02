@@ -1,0 +1,16 @@
+<div class="sidebar-main">
+  <p class="sidebar-name">c/<%= community.name %></p>
+  <p>4242 subscribers</p>
+  <a href="#" class="pure-button button-lavender">Subscribe</a>
+  <div class="community-desc markdown">
+    <%= simple_format community.description %>
+  </div>
+  <div class="moderators">
+    <h4>Community moderators:</h4>
+    <ul class="moderators">
+    <% community.moderators.each do |m| %>
+      <li><%= link_to "u/#{m.username}", m %></li>
+    <% end %>
+    </ul>
+  </div>
+</div>

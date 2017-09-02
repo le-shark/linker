@@ -1,0 +1,43 @@
+<%= provide(:title, "#{@community.name} : new post") %>
+<% content_for :header do %>
+  <p class="left">
+    <%= @community.name %> - new
+    <% if params[:textpost] == "1" %>
+      text post
+    <% else %>
+      link
+    <% end %>
+  </p>
+<% end %>
+<%= content_for :sidebar do %>
+  <%= render 'community_sidebar', community: @community %>
+<% end %>
+<% if params[:textpost] == "1" %>
+  <%= form_for @post, url: submit_community_path, html: { class: 'pure-form pure-form-stacked' } do |f| %>
+    <%= render "shared/error_messages", object: @post %>
+
+    <%= f.hidden_field :type, value: "TextPost" %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :text %>
+    <%= f.text_area :text %>
+
+    <%= f.submit "Post", class: "pure-button button-lavender" %>
+  <% end %>
+<% else %>
+  <%= form_for @post, url: submit_community_path, html: { class: 'pure-form pure-form-stacked' } do |f| %>
+    <%= render "shared/error_messages", object: @post %>
+
+    <%= f.hidden_field :type, value: "Link" %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :link %>
+    <%= f.text_field :link %>
+
+    <%= f.submit "Post", class: "pure-button button-lavender" %>
+  <% end %>
+<% end %>

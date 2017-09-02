@@ -16,7 +16,7 @@
     <h3 class="post-title"><%= link_to post.title, post %></h3>
     <p>submitted <%= time_ago_in_words post.created_at %> ago by
     <%= link_to post.user do %>
-      <%= gravatar_for(current_user, size: 17, classes: "pure-img-eliptical") %>
+      <%= gravatar_for(post.user, size: 17, classes: "pure-img-eliptical") %>
       <%= post.user.username %>
     <% end %>
     <% if controller_name != "communities" %>

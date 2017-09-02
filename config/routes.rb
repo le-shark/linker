@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'posts/new'
+
   get 'sessions/new'
 
   get 'users/show'
@@ -12,6 +14,8 @@ Rails.application.routes.draw do
     resources :posts
   end
   resources :c, controller: 'communities', as: 'communities' do
+    get 'submit', to: 'posts#new', on: :member
+    post 'submit', to: 'posts#create', on: :member
     resources :posts
   end
 

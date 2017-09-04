@@ -15,9 +15,30 @@ class PostsController < ApplicationController
     @post = @community.posts.build(post_params)
     @post.user = current_user
     if @post.save
+      @post.upvote current_user
       redirect_to @community
     else
       render 'new', params: { textpost: params[:textpost] }
+    end
+  end
+
+  def upvote
+    @post = Post.find(params[:id])
+    if current_user.voted_for? @post
+      redirect_to request.referer
+    else
+      @post.upvote current_user
+      redirect_to request.referer
+    end
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    if current_user.voted_for? @post
+      redirect_to request.referer
+    else
+      @post.downvote current_user
+      redirect_to request.referer
     end
   end
 

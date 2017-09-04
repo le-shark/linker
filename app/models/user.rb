@@ -17,6 +17,15 @@ class User < ApplicationRecord
                                    foreign_key: 'moderator_id'
   has_many :moderated_communities, through: :moderations, source: :moderated
   has_many :posts
+  acts_as_voter
+
+  def increase_post_karma(count=1)
+    update_attribute(:post_karma, post_karma + count)
+  end
+
+  def decrease_post_karma(count=1)
+    update_attribute(:post_karma, post_karma - count)
+  end
 
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :

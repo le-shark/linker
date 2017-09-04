@@ -24,4 +24,7 @@
     <% end %>
     </p>
   </div>
+  <%= post.score %>
+  <%= link_to "Updiit", upvote_community_post_path(post.community, post), method: :put %>
+  <%= link_to "Dundiit", downvote_community_post_path(post.community, post), method: :put %>
 </div>

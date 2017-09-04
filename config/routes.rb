@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :c, controller: 'communities', as: 'communities' do
     get 'submit', to: 'posts#new', on: :member
     post 'submit', to: 'posts#create', on: :member
-    resources :posts
+    resources :posts do
+      put "upvote", to: "posts#upvote", on: :member
+      put "downvote", to: "posts#downvote", on: :member
+    end
   end
 end

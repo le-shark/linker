@@ -80,7 +80,7 @@ html, button, input, select, textarea,
 }
 
 .sidebar-main {
-  padding-left: 20px;
+  padding: 0 20px;
 }
 
 .header {
@@ -234,6 +234,9 @@ html, button, input, select, textarea,
 
 .post-desc {
   display: inline-block;
+  h3 {
+    margin-bottom: 5px;
+  }
   p {
     margin: 0;
     font-size: small;
@@ -289,4 +292,20 @@ html, button, input, select, textarea,
 .user-posts {
   clear: both;
   margin-top: 5px;
+}
+
+.block-button {
+  display: block;
+  width: auto;
+  margin-bottom: 4px;
+}
+
+.post-image {
+  max-width: 100%;
+}
+
+.mk-tip {
+  color: $quite-gray;
+  font-size: small;
+  margin: 0;
 }

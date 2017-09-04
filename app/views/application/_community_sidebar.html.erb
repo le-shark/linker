@@ -1,7 +1,11 @@
 <div class="sidebar-main">
-  <p class="sidebar-name">c/<%= community.name %></p>
+  <%= link_to community do %>
+    <p class="sidebar-name">c/<%= community.name %></p>
+  <% end %>
   <p>4242 subscribers</p>
-  <a href="#" class="pure-button button-lavender">Subscribe</a>
+  <a href="#" class="pure-button button-lavender block-button">Subscribe</a>
+  <%= link_to "Submit a link", submit_community_path(community), class: "pure-button button-lavender block-button" %>
+  <%= link_to "Submit a text post", submit_community_path(community, textpost: "1"), class: "pure-button button-lavender block-button" %>
   <div class="community-desc markdown">
     <%= simple_format community.description %>
   </div>

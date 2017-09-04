@@ -1,5 +1,10 @@
 class PostsController < ApplicationController
   before_action :confirm_logged_in, only: [:new, :create]
+
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def new
     @community = Community.find(params[:id])
     @post = Post.new

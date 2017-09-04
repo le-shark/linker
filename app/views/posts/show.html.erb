@@ -1,0 +1,21 @@
+<%= provide(:title, "#{@post.title} - #{@post.community.title}") %>
+<% content_for :header do %>
+  <p class="left"></p>
+<% end %>
+<%= content_for :sidebar do %>
+  <%= render 'community_sidebar', community: @post.community %>
+<% end %>
+<%= render 'post_preview', post: @post %>
+<% if !@post.link? %>
+  <div class="markdown">
+    <%= simple_format @post.text %>
+  </div>
+<% elsif !@post.image? %>
+<%= link_to @post.link, class: "icon-link" do %>
+  <%= content_tag :h3, @post.link %>
+<% end %>
+<% else %>
+  <%= link_to @post.link, class: "icon-link" do %>
+    <%= image_tag @post.link, class: "post-image" %>
+  <% end %>
+<% end %>

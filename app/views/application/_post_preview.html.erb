@@ -1,6 +1,6 @@
 <div class="post-preview">
   <% if !post.link? %>
-    <%= link_to post, class: "icon-link" do %>
+    <%= link_to community_post_path(post, community_id: post.community.slug), class: "icon-link" do %>
       <%= image_tag "text.png", class: "text-icon" %>
     <% end %>
   <% elsif !post.image? %>
@@ -13,7 +13,7 @@
     <% end %>
   <% end %>
   <div class="post-desc">
-    <h3 class="post-title"><%= link_to post.title, post %></h3>
+    <h3 class="post-title"><%= link_to post.title, community_post_path(post, community_id: post.community.slug) %></h3>
     <p>submitted <%= time_ago_in_words post.created_at %> ago by
     <%= link_to post.user do %>
       <%= gravatar_for(post.user, size: 17, classes: "pure-img-eliptical") %>

@@ -22,7 +22,8 @@
     <%= f.text_field :title %>
 
     <%= f.label :text %>
-    <%= f.text_area :text %>
+    <p class="mk-tip">Tip: use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to format your text</p>
+    <%= f.text_area :text, style: "width: 75%; height: 300px;" %>
 
     <%= f.submit "Post", class: "pure-button button-lavender" %>
   <% end %>

@@ -8,6 +8,7 @@ $pale-blue: #72e1d1;
 $bg-gray: #f7f7f7;
 $text-color: #222;
 $quite-gray: #424242;
+$not-so-gray: #9E9E9E;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -308,4 +309,42 @@ html, button, input, select, textarea,
   color: $quite-gray;
   font-size: small;
   margin: 0;
+}
+
+.voting {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+
+.arrow-down-gray {
+  @extend .arrow;
+  border-top: 8px solid $not-so-gray;
+}
+
+.arrow-up-gray {
+  @extend .arrow;
+  border-bottom: 8px solid $not-so-gray;
+}
+
+.arrow-up {
+  @extend .arrow;
+  border-bottom: 8px solid $shiny-shamrock;
+}
+
+.arrow-down {
+  @extend .arrow;
+  border-top: 8px solid $pomp-and-power;
+}
+
+.post-score {
+  margin: 6px 0 !important;
 }

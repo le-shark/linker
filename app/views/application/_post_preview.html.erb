@@ -24,7 +24,21 @@
     <% end %>
     </p>
   </div>
-  <%= post.score %>
-  <%= link_to "Updiit", upvote_community_post_path(post.community, post), method: :put %>
-  <%= link_to "Dundiit", downvote_community_post_path(post.community, post), method: :put %>
+  <div class="voting">
+    <%= link_to upvote_community_post_path(post.community, post), remote: true, method: :put do %>
+      <% if current_user && current_user.voted_up_on?(post) %>
+        <%= content_tag :div, '', class: "arrow-up", id: "upvote_#{post.id}" %>
+      <% else %>
+        <%= content_tag :div, '', class: "arrow-up-gray", id: "upvote_#{post.id}" %>
+      <% end %>
+    <% end %>
+    <%= content_tag :p, post.score, class: "post-score", id: "upvotes_#{post.id}" %>
+    <%= link_to downvote_community_post_path(post.community, post), remote: true, method: :put do %>
+      <% if current_user && current_user.voted_down_on?(post) %>
+        <div class="arrow-down"></div>
+      <% else %>
+        <div class="arrow-down-gray"></div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

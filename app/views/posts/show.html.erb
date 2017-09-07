@@ -19,3 +19,23 @@
     <%= image_tag @post.link, class: "post-image" %>
   <% end %>
 <% end %>
+<hr>
+<p><%= pluralize(@post.comments.count, "comment") %></p>
+<%= form_for [@post.community, @post, Comment.new], html: { class: "pure-form" } do |f| %>
+<%= f.text_area :text, placeholder: "What do you think?", class: "pure-input-1-2 comment-input" %><br/>
+<%= f.submit "post" %>
+<% end %>
+<%= content_for :comments do %>
+  <%= render(partial: 'comments/comment', collection: @post.comments.reverse) %>
+<% end %>
+<%= content_for :javascript do %>
+  <script type="text/javascript">
+    document.querySelectorAll('.reply-link').forEach((link) => {
+      link.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        var div = document.getElementById(`reply-${link.dataset.reply}`);
+        div.style.display = div.style.display === 'none' ? 'block' : 'none';
+      });
+    });
+  </script>
+<% end %>

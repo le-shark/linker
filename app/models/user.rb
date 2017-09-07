@@ -17,6 +17,7 @@ class User < ApplicationRecord
                                    foreign_key: 'moderator_id'
   has_many :moderated_communities, through: :moderations, source: :moderated
   has_many :posts
+  has_many :comments
   acts_as_voter
 
   def increase_post_karma(count=1)

@@ -318,6 +318,12 @@ html, button, input, select, textarea,
   text-align: center;
 }
 
+.comment-voting {
+  @extend .voting;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .arrow {
   width: 0;
   height: 0;
@@ -347,4 +353,53 @@ html, button, input, select, textarea,
 
 .post-score {
   margin: 6px 0 !important;
+}
+
+.comment-input {
+  height: 120px;
+}
+
+.comment-container {
+  @include block_shadow;
+  padding: 20px 20px;
+  margin: 0 40px;
+  overflow: auto;
+  background-color: white;
+  margin-top: 10px;
+}
+
+.comment {
+  display: flex;
+  small {
+    font-weight: 300;
+  }
+  h5 {
+    margin: 0 10px;
+  }
+  p {
+    margin: 0 10px;
+  }
+  a:visited {
+    color: inherit;
+  }
+  .comment-tools {
+    margin: 0 10px;
+  }
+}
+
+.comment-main {
+  width: 100%;
+}
+
+.reply-form {
+  display: none;
+  margin: 10px;
+}
+
+.divider {
+  width: 1px;
+  height: 8px;
+  margin: 0;
+  visibility: hidden;
+  font-size: 4px;
 }

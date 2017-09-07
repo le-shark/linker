@@ -1,0 +1,28 @@
+<div class="comment-container">
+  <div class="comment">
+    <div class="comment-voting">
+      <%= content_tag :div, '', class: "arrow-up-gray" %>
+      <p class="divider">let's pretend i'm not here, ok?</p>
+      <div class="arrow-down-gray"></div>
+    </div>
+    <div class="comment-main">
+      <h5>
+        <%= link_to comment.user.username, comment.user %> • 1 point
+        <small><%= time_ago_in_words(comment.created_at) %> ago</small>
+      </h5>
+      <p>
+        <%= comment.text %>
+      </p>
+      <div class="comment-tools">
+        <small><a href="#" class="reply-link" data-reply="<%= comment.id %>">Reply</a></small>
+      </div>
+      <div class="reply-form" id="reply-<%= comment.id %>" style="display: none;">
+        <%= form_for [comment, Comment.new], html: { class: "pure-form" } do |f| %>
+          <%= f.text_area :text, placeholder: "Add a Reply", class: "pure-input-1-2 comment-input" %><br/>
+          <%= f.submit "Reply"  %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <%= render partial: 'comments/comment', collection: comment.comments %>
+</div>

@@ -15,8 +15,12 @@ Rails.application.routes.draw do
     get 'submit', to: 'posts#new', on: :member
     post 'submit', to: 'posts#create', on: :member
     resources :posts do
+      resources :comments
       put "upvote", to: "posts#upvote", on: :member
       put "downvote", to: "posts#downvote", on: :member
     end
+  end
+  resources :comments do
+    resources :comments
   end
 end

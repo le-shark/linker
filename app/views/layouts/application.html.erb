@@ -33,6 +33,7 @@
           <% end %>
           <%= yield %>
         </div>
+        <%= yield :comments %>
       </div>
     </div>
     <script>
@@ -41,5 +42,6 @@
         el.innerHTML = marked(el.innerText);
       });
     </script>
+    <%= yield :javascript %>
   </body>
 </html>

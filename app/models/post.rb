@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   validates :type, presence: true
   validates :title, presence: true
   acts_as_votable
+  has_many :comments, as: :commentable
 
   def upvote(user)
     self.upvote_by user

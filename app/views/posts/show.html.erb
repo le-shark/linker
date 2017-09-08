@@ -25,8 +25,9 @@
 <%= f.text_area :text, placeholder: "What do you think?", class: "pure-input-1-2 comment-input" %><br/>
 <%= f.submit "post" %>
 <% end %>
+<% depth = 0 %>
 <%= content_for :comments do %>
-  <%= render(partial: 'comments/comment', collection: @post.comments.reverse) %>
+  <%= render partial: 'comments/comment', collection: @post.comments.reverse, locals: { depth: depth + 1 } %>
 <% end %>
 <%= content_for :javascript do %>
   <script type="text/javascript">

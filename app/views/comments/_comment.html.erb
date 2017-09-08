@@ -1,4 +1,9 @@
-<div class="comment-container">
+<% if depth.even? %>
+  <% gray = "comment-gray" %>
+<% else %>
+  <% gray = "" %>
+<% end %>
+<div class="comment-container <%= gray %>">
   <div class="comment">
     <div class="comment-voting">
       <%= content_tag :div, '', class: "arrow-up-gray" %>
@@ -24,5 +29,5 @@
       </div>
     </div>
   </div>
-  <%= render partial: 'comments/comment', collection: comment.comments %>
+  <%= render partial: 'comments/comment', collection: comment.comments, locals: { depth: depth + 1 } %>
 </div>

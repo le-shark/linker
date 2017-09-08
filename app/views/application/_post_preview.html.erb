@@ -24,7 +24,7 @@
     <% end %>
     </p>
     <h5>
-      <%= link_to pluralize(post.comments.count, "comments"), community_post_path(post, community_id: post.community.slug) %>
+      <%= link_to pluralize(post.comments_count, "comments"), community_post_path(post, community_id: post.community.slug) %>
     </h5>
   </div>
   <div class="voting">

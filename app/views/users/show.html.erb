@@ -9,7 +9,7 @@
       <span class="sidebar-karma"><%= @user.post_karma %></span> post karma
     </p>
     <p>
-      <span class="sidebar-karma">88</span> comment karma
+      <span class="sidebar-karma"><%= @user.comment_karma %></span> comment karma
     </p>
     <p title="<%= @user.created_at %>">registered <%= time_ago_in_words @user.created_at %> ago</p>
   </div>

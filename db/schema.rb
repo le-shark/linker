@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170908204549) do
+ActiveRecord::Schema.define(version: 20170909202158) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170908204549) do
     t.boolean "admin", default: false
     t.string "slug"
     t.integer "post_karma", default: 0
+    t.integer "comment_karma", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true

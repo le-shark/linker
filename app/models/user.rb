@@ -32,6 +32,14 @@ class User < ApplicationRecord
     update_attribute(:post_karma, post_karma - count)
   end
 
+  def increase_comment_karma(count=1)
+    update_attribute(:comment_karma, comment_karma + count)
+  end
+
+  def decrease_comment_karma(count=1)
+    update_attribute(:comment_karma, comment_karma - count)
+  end
+
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost

@@ -9,10 +9,31 @@ before_action :find_commentable
     @comment = @commentable.comments.new comment_params
     @comment.user = current_user
     if @comment.save
+      @comment.upvote_by current_user
       redirect_to request.referer
     else
       redirect_to request.referer, notice: "Your comment wasn't posted!"
     end
+  end
+
+  def upvote
+    @comment = Comment.find(params[:id])
+    if current_user.disliked? @comment
+      @comment.undisliked_by current_user
+      @comment.user.increase_post_karma
+    end
+    @comment.upvote current_user
+    redirect_to request.referer
+  end
+
+  def downvote
+    @comment = Comment.find(params[:id])
+    if current_user.liked? @comment
+      @comment.unliked_by current_user
+      @comment.user.decrease_post_karma
+    end
+    @comment.downvote current_user
+    redirect_to request.referer
   end
 
   private

@@ -14,14 +14,26 @@
   <div class="comment">
     <% if @in_post %>
     <div class="comment-voting">
-      <%= content_tag :div, '', class: "arrow-up-gray" %>
+      <%= link_to upvote_comment_path(comment), method: :put do %>
+        <% if current_user && current_user.voted_up_on?(comment) %>
+          <div class="arrow-up"></div>
+        <% else %>
+          <div class="arrow-up-gray"></div>
+        <% end %>
+      <% end %>
       <p class="divider">let's pretend i'm not here, ok?</p>
-      <div class="arrow-down-gray"></div>
+      <%= link_to downvote_comment_path(comment), method: :put do %>
+        <% if current_user && current_user.voted_down_on?(comment) %>
+          <div class="arrow-down"></div>
+        <% else %>
+          <div class="arrow-down-gray"></div>
+        <% end %>
+      <% end %>
     </div>
     <% end %>
     <div class="comment-main">
       <h5>
-        <%= link_to comment.user.username, comment.user %> • 1 point
+        <%= link_to comment.user.username, comment.user %> • <%= pluralize comment.score, "point" %>
         <small><%= time_ago_in_words(comment.created_at) %> ago</small>
       </h5>
       <p>

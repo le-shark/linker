@@ -16,6 +16,10 @@ class User < ApplicationRecord
   has_many :moderations, class_name: 'Moderation',
                                    foreign_key: 'moderator_id'
   has_many :moderated_communities, through: :moderations, source: :moderated
+  has_many :savings, class_name: 'Saving',
+                                   foreign_key: 'saver_id'
+  has_many :saved_posts, through: :savings, source: :saved_post
+  has_many :saved_comments, through: :savings, source: :saved_comment
   has_many :posts
   has_many :comments
   acts_as_voter

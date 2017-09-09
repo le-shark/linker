@@ -261,6 +261,15 @@ html, button, input, select, textarea,
   }
 }
 
+.post-tools {
+  a {
+    color: $text-color;
+    &:not(:first-child) {
+      margin-left: 5px;
+    }
+  }
+}
+
 .post-title {
   margin: 0;
   font-weight: 400;
@@ -375,6 +384,11 @@ html, button, input, select, textarea,
   border: 1px solid #E0E0E0;
 }
 
+.comment-container-saved {
+  margin: 0 0 10px 15px;
+  display: flex;
+}
+
 .comment-gray {
   background-color: $bg-gray;
 }
@@ -395,6 +409,12 @@ html, button, input, select, textarea,
   }
   .comment-tools {
     margin: 0 10px;
+    a {
+      color: $text-color;
+      &:not(:first-child) {
+        margin-left: 5px;
+      }
+    }
   }
 }
 

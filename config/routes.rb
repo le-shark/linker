@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  post 'save', to: 'savings#create'
+  delete 'unsave', to: 'savings#destroy'
+
   get 'posts/new'
 
   get 'sessions/new'
@@ -10,7 +13,9 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
 
-  resources :u, controller: 'users', as: 'users'
+  resources :u, controller: 'users', as: 'users' do
+    get :saved
+  end
   resources :c, controller: 'communities', as: 'communities' do
     get 'submit', to: 'posts#new', on: :member
     post 'submit', to: 'posts#create', on: :member

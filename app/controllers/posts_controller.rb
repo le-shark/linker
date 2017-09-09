@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @post = @community.posts.build(post_params)
     @post.user = current_user
     if @post.save
-      @post.upvote current_user
+      @post.upvote_by current_user
       redirect_to @community
     else
       render 'new', params: { textpost: params[:textpost] }

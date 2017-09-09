@@ -1,15 +1,24 @@
-<% if depth.even? %>
+<% if params[:controller] == "posts" %>
+  <% @in_post = true %>
+<% end %>
+<% if @in_post && depth.even? %>
   <% gray = "comment-gray" %>
 <% else %>
   <% gray = "" %>
 <% end %>
-<div class="comment-container <%= gray %>">
+<% if !@in_post %>
+  <div class="comment-container-saved">
+<% else %>
+  <div class="comment-container <%= gray %>">
+<% end %>
   <div class="comment">
+    <% if @in_post %>
     <div class="comment-voting">
       <%= content_tag :div, '', class: "arrow-up-gray" %>
       <p class="divider">let's pretend i'm not here, ok?</p>
       <div class="arrow-down-gray"></div>
     </div>
+    <% end %>
     <div class="comment-main">
       <h5>
         <%= link_to comment.user.username, comment.user %> • 1 point
@@ -19,7 +28,16 @@
         <%= comment.text %>
       </p>
       <div class="comment-tools">
-        <small><a href="#" class="reply-link" data-reply="<%= comment.id %>">Reply</a></small>
+        <small>
+          <% if @in_post %>
+            <a href="#" class="reply-link" data-reply="<%= comment.id %>">reply</a>
+          <% end %>
+          <% if current_user && !current_user.saved_comments.include?(comment) %>
+            <%= link_to "save", save_path(comment_id: comment.id), method: :post %>
+          <% elsif current_user %>
+            <%= link_to "unsave", unsave_path(saving_id: comment.id), method: :delete %>
+          <% end %>
+        </small>
       </div>
       <div class="reply-form" id="reply-<%= comment.id %>" style="display: none;">
         <%= form_for [comment, Comment.new], html: { class: "pure-form" } do |f| %>
@@ -29,5 +47,7 @@
       </div>
     </div>
   </div>
-  <%= render partial: 'comments/comment', collection: comment.comments, locals: { depth: depth + 1 } %>
+  <% if @in_post %>
+    <%= render partial: 'comments/comment', collection: comment.comments, locals: { depth: depth + 1 } %>
+  <% end %>
 </div>

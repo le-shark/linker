@@ -1,3 +1,6 @@
+<% if params[:action] == "saved" %>
+  <% @from_saved = true %>
+<% end %>
 <div class="post-preview">
   <% if !post.link? %>
     <%= link_to community_post_path(post, community_id: post.community.slug), class: "icon-link" do %>
@@ -23,10 +26,16 @@
       &thinsp;to<%= link_to "c/#{post.community.name}", post.community %>
     <% end %>
     </p>
-    <h5>
+    <h5 class="post-tools">
       <%= link_to pluralize(post.comments_count, "comments"), community_post_path(post, community_id: post.community.slug) %>
+      <% if current_user && !current_user.saved_posts.include?(post) %>
+        <%= link_to "save", save_path(post_id: post.id), method: :post %>
+      <% elsif current_user %>
+        <%= link_to "unsave", unsave_path(saving_id: post.id), method: :delete %>
+      <% end %>
     </h5>
   </div>
+  <% if !@from_saved %>
   <div class="voting">
     <%= link_to upvote_community_post_path(post.community, post), remote: true, method: :put do %>
       <% if current_user && current_user.voted_up_on?(post) %>
@@ -44,4 +53,5 @@
       <% end %>
     <% end %>
   </div>
+  <% end %>
 </div>

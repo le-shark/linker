@@ -7,6 +7,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def saved
+    @user = User.find(params[:user_id])
+    @savings = @user.savings.reverse
+    render "show"
+  end
+
   def new
     @user = User.new
   end

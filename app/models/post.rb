@@ -6,6 +6,10 @@ class Post < ApplicationRecord
   acts_as_votable
   has_many :comments, as: :commentable
 
+  has_many :savings, class_name: 'Saving',
+                        foreign_key: 'saved_post_id'
+  has_many :savers, through: :savings
+
   def comments_count
     count = 0
     self.comments.each do |c|

@@ -10,12 +10,20 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
+  def gild
+    @post = Post.find(params[:post_id])
+    @post.gild
+    flash[:success] = "Let's pretend that you paid $3 to gild this post"
+    redirect_to request.referer
+  end
+
   def create
     @community = Community.find(params[:id])
     @post = @community.posts.build(post_params)
     @post.user = current_user
     if @post.save
       @post.upvote_by current_user
+      flash[:success] = "Successfully submitted a new post!"
       redirect_to @community
     else
       render 'new', params: { textpost: params[:textpost] }

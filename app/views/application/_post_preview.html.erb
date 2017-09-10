@@ -1,6 +1,9 @@
 <% if params[:action] == "saved" %>
   <% @from_saved = true %>
 <% end %>
+<% if params[:controller] == "posts" && params[:action] == "show" %>
+  <% @from_show = true %>
+<% end %>
 <div class="post-preview">
   <% if !post.link? %>
     <%= link_to community_post_path(post, community_id: post.community.slug), class: "icon-link" do %>
@@ -25,6 +28,14 @@
     <% if controller_name != "communities" %>
       &thinsp;to<%= link_to "c/#{post.community.name}", post.community %>
     <% end %>
+    <span title="This post deserved a gold from a generous user!">
+    <% if post.gold > 0 %>
+      <%= image_tag "gold-star", class: "gold-star" %>
+    <% end %>
+    <% if post.gold > 1 %>
+      <span class="gold-amount">x<%= post.gold %></span>
+    <% end %>
+  </span>
     </p>
     <h5 class="post-tools">
       <%= link_to pluralize(post.comments_count, "comments"), community_post_path(post, community_id: post.community.slug) %>
@@ -32,6 +43,9 @@
         <%= link_to "save", save_path(post_id: post.id), method: :post %>
       <% elsif current_user %>
         <%= link_to "unsave", unsave_path(saving_id: post.id), method: :delete %>
+      <% end %>
+      <% if @from_show %>
+        <%= link_to "give gold", community_post_gild_path(post.community ,post), class: "gold-link", method: :put %>
       <% end %>
     </h5>
   </div>

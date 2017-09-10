@@ -9,6 +9,7 @@ $bg-gray: #f7f7f7;
 $text-color: #222;
 $quite-gray: #424242;
 $not-so-gray: #9E9E9E;
+$gold: #F2A900;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -432,4 +433,18 @@ html, button, input, select, textarea,
   margin: 0;
   visibility: hidden;
   font-size: 4px;
+}
+
+.gold-star {
+  margin-left: 5px;
+  width: 15px;
+}
+
+.gold-amount {
+  color: $gold !important;
+}
+
+.gold-link {
+  margin-left: 3px;
+  cursor: pointer;
 }

@@ -42,6 +42,11 @@ class Post < ApplicationRecord
     self.get_upvotes.size - self.get_downvotes.size
   end
 
+  def gild
+    self.gold = self.gold + 1
+    self.save
+  end
+
   def image?
     self.link.end_with?(".jpg", ".jpeg", ".png")
   end

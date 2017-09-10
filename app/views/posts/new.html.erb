@@ -25,6 +25,10 @@
     <p class="mk-tip">Tip: use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to format your text</p>
     <%= f.text_area :text, style: "width: 75%; height: 300px;" %>
 
+    <div class="markdown">
+      <%= simple_format @community.rules %>
+    </div>
+
     <%= f.submit "Post", class: "pure-button button-lavender" %>
   <% end %>
 <% else %>
@@ -38,6 +42,10 @@
 
     <%= f.label :link %>
     <%= f.text_field :link %>
+
+    <div class="markdown">
+      <%= simple_format @community.rules %>
+    </div>
 
     <%= f.submit "Post", class: "pure-button button-lavender" %>
   <% end %>

@@ -1,0 +1,20 @@
+<%= provide(:title, "Community index") %>
+<% content_for :header do %>
+  <p class="left">Community index</p>
+<% end %>
+<hr>
+<% @communities.each do |c| %>
+  <%= render 'community_preview', community: c %>
+<% end %>
+
+<%= will_paginate @communities, page_links: false %>
+<% content_for :javascript do %>
+  <script>
+    document.querySelector('.previous_page').classList.toggle('pure-button');
+    document.querySelector('.previous_page').classList.toggle('button-lavender');
+    document.querySelector('.previous_page').innerText = "prev";
+    document.querySelector('.next_page').classList.toggle('pure-button');
+    document.querySelector('.next_page').classList.toggle('button-lavender');
+    document.querySelector('.next_page').innerText = "next";
+  </script>
+<% end %>

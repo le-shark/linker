@@ -43,7 +43,7 @@
       </div>
     <% end %>
     <% if params[:action] == "show" %>
-      <% @user.posts.reverse.each do |post| %>
+      <% @posts.each do |post| %>
         <%= render 'post_preview', post: post %>
       <% end %>
     <% elsif params[:action] == "saved" %>
@@ -55,5 +55,20 @@
         <% end %>
       <% end %>
     <% end %>
+
+    <% if params[:action] == "show" %>
+      <%= will_paginate @posts, page_links: false %>
+    <% end %>
   </div>
 </div>
+
+<% content_for :javascript do %>
+  <script>
+    document.querySelector('.previous_page').classList.toggle('pure-button');
+    document.querySelector('.previous_page').classList.toggle('button-lavender');
+    document.querySelector('.previous_page').innerText = "prev";
+    document.querySelector('.next_page').classList.toggle('pure-button');
+    document.querySelector('.next_page').classList.toggle('button-lavender');
+    document.querySelector('.next_page').innerText = "next";
+  </script>
+<% end %>

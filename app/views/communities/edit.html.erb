@@ -1,0 +1,23 @@
+<%= provide(:title, "Edit community") %>
+<% content_for :header do %>
+  <p class="left">Edit community</p>
+<% end %>
+<%= form_for @community, html: { class: 'pure-form pure-form-stacked' } do |f| %>
+  <%= render 'shared/error_messages', object: @community %>
+
+  <%= f.label :title, class: 'hover-tip', title: "Will be displayed in the community index and on your community page" %>
+  <%= f.text_field :title, placeholder: "Title", title: "Will be displayed in the community index and on your community page" %>
+
+  <%= f.label :small_description, class: 'hover-tip', title: "Will be displayed in the community index" %>
+  <%= f.text_field :small_description, placeholder: "Small desc.", title: "Will be displayed in the community index" %>
+
+  <%= f.label :description, class: 'hover-tip', title: "Will be displayed in community sidebar" %>
+  <p class="mk-tip">Tip: use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to format your text</p>
+  <%= f.text_area :description, placeholder: "Description", title: "Will be displayed in community sidebar", style: "width: 75%; height: 300px;" %>
+
+  <%= f.label :rules, class: 'hover-tip', title: "Will be displayed on the posting page" %>
+  <p class="mk-tip">Tip: use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to format your text</p>
+  <%= f.text_area :rules, placeholder: "Rules", title: "Will be displayed on the posting page", style: "width: 75%; height: 200px;" %>
+
+  <%= f.submit "Save changes", class: "pure-button button-lavender" %>
+<% end %>

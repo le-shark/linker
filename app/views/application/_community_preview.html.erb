@@ -1,0 +1,9 @@
+<div class="community-preview">
+  <%= link_to community do %>
+    <h3><%= community.title %></h3> - c/<%= community.name %><br>
+  <% end %>
+  <p class="subs"><%= pluralize community.subscribed_users.size, "subscriber" %></p> -
+  <small>a community for <%= time_ago_in_words(community.created_at) %></small>
+  <p><%= community.small_description %></p>
+  <hr>
+</div>

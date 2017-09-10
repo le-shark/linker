@@ -3,6 +3,7 @@
     <p class="sidebar-name">c/<%= community.name %></p>
   <% end %>
   <p><%= pluralize community.subscribed_users.size, "subscriber" %></p>
+  <small>a community for <%= time_ago_in_words(community.created_at) %></small>
   <% if current_user && current_user.subscribed_communities.include?(community) %>
     <%= link_to "Unsubscribe", unsubscribe_community_path(community), class: "pure-button button-lavender block-button", method: :delete %>
   <% else %>
@@ -21,4 +22,7 @@
     <% end %>
     </ul>
   </div>
+  <% if current_user && community.moderators.include?(current_user) %>
+    <%= link_to "Community settings", edit_community_path(community) %>
+  <% end %>
 </div>

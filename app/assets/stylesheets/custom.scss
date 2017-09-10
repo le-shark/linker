@@ -83,6 +83,12 @@ html, button, input, select, textarea,
 
 .sidebar-main {
   padding: 0 20px;
+  h3 {
+    margin-bottom: 5px;
+    a {
+      color: $twilight-lavender;
+    }
+  }
 }
 
 .header {
@@ -450,4 +456,30 @@ html, button, input, select, textarea,
 .gold-link {
   margin-left: 3px;
   cursor: pointer;
+}
+
+.comm-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  li {
+    margin: 0;
+    a {
+      color: $twilight-lavender;
+    }
+  }
+}
+
+.community-preview {
+  a {
+    h3 {
+      display: inline;
+    }
+  }
+  .subs {
+    display: inline;
+  }
+  * {
+    margin: 0 0 3px 0 !important;
+  }
 }

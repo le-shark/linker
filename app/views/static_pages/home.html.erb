@@ -4,14 +4,22 @@
 <% end %>
 <%= content_for :sidebar do %>
   <div class="sidebar-main">
-
+    <h3><%= link_to "Community index", communities_path %></h3>
+    <% if current_user %>
+      <h3>Your communities:</h3>
+      <ul class="comm-list">
+        <% current_user.subscribed_communities.each do |c| %>
+          <li><%= link_to c.title, c %></li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 <% end %>
 
 <% if !current_user %>
   <h2>Welcome to Linker!</h2>
   <p>Linker is a place where people unite into communities based on their interests.
-    You can post links and pictures, share your ideas or start a discussion - feel free to check our community index!</p>
+    You can post links and pictures, share your ideas or start a discussion - feel free to check our <%= link_to "community index", communities_path %>!</p>
   <h3>Here are some of our latest posts:</h3>
 <% end %>
 <% @posts.each do |post| %>

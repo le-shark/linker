@@ -10,6 +10,8 @@ class Post < ApplicationRecord
                         foreign_key: 'saved_post_id'
   has_many :savers, through: :savings
 
+  self.per_page = 10
+
   def comments_count
     count = 0
     self.comments.each do |c|

@@ -7,8 +7,25 @@
 
   </div>
 <% end %>
-<% if current_user %>
-  <% current_user.feed.each do |post| %>
-    <%= render 'post_preview', post: post %>
-  <% end %>
+
+<% if !current_user %>
+  <h2>Welcome to Linker!</h2>
+  <p>Linker is a place where people unite into communities based on their interests.
+    You can post links and pictures, share your ideas or start a discussion - feel free to check our community index!</p>
+  <h3>Here are some of our latest posts:</h3>
+<% end %>
+<% @posts.each do |post| %>
+  <%= render 'post_preview', post: post %>
+<% end %>
+
+<%= will_paginate @posts, page_links: false %>
+<% content_for :javascript do %>
+  <script>
+    document.querySelector('.previous_page').classList.toggle('pure-button');
+    document.querySelector('.previous_page').classList.toggle('button-lavender');
+    document.querySelector('.previous_page').innerText = "prev";
+    document.querySelector('.next_page').classList.toggle('pure-button');
+    document.querySelector('.next_page').classList.toggle('button-lavender');
+    document.querySelector('.next_page').innerText = "next";
+  </script>
 <% end %>

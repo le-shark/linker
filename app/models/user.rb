@@ -70,6 +70,6 @@ class User < ApplicationRecord
 
   def feed
     Post.where("community_id IN (:subscribed_community_ids)",
-                subscribed_community_ids: subscribed_community_ids).reverse
+                subscribed_community_ids: subscribed_community_ids)
   end
 end

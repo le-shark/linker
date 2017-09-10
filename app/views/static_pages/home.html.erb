@@ -7,3 +7,8 @@
 
   </div>
 <% end %>
+<% if current_user %>
+  <% current_user.feed.each do |post| %>
+    <%= render 'post_preview', post: post %>
+  <% end %>
+<% end %>

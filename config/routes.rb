@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
   resources :c, controller: 'communities', as: 'communities' do
     post 'subscribe', to: 'subscription#create', on: :member
+    delete 'unsubscribe', to: 'subscription#destroy', on: :member
     get 'submit', to: 'posts#new', on: :member
     post 'submit', to: 'posts#create', on: :member
     resources :posts do

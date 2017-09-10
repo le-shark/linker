@@ -67,4 +67,9 @@ class User < ApplicationRecord
     return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password? remember_token
   end
+
+  def feed
+    Post.where("community_id IN (:subscribed_community_ids)",
+                subscribed_community_ids: subscribed_community_ids).reverse
+  end
 end

@@ -3,7 +3,7 @@ class SubscriptionController < ApplicationController
 
   def create
     @subscription = Subscription.create
-    @subscription.community_id = params[:community_id]
+    @subscription.community = Community.find(params[:id])
     @subscription.user_id = current_user.id
     if @subscription.save!
       flash[:success] = "Subscribed #{@subscription.community.name}"
@@ -15,12 +15,13 @@ class SubscriptionController < ApplicationController
   end
 
   def destroy
-    @subscription = Subscription.find(params[:subscription_id])
-    if current_user.subscriptions.include? @subscriptions
+    @subscription = Subscription.where(community_id: Community.find(params[:id]).id, user_id: current_user.id).first
+    if current_user.subscriptions.include? @subscription
+      flash[:success] = "Unsubscribed #{@subscription.community.name}"
       @subscription.delete
       redirect_to request.referer
     else
-      flash[:error] = "Can't unsubscribe the unsubscribe!"
+      flash[:error] = "Can't unsubscribe the unsubscribable!"
       redirect_to request.referer
     end
   end

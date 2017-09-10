@@ -3,7 +3,11 @@
     <p class="sidebar-name">c/<%= community.name %></p>
   <% end %>
   <p><%= pluralize community.subscribed_users.size, "subscriber" %></p>
-  <a href="#" class="pure-button button-lavender block-button">Subscribe</a>
+  <% if current_user && current_user.subscribed_communities.include?(community) %>
+    <%= link_to "Unsubscribe", unsubscribe_community_path(community), class: "pure-button button-lavender block-button", method: :delete %>
+  <% else %>
+    <%= link_to "Subscribe", subscribe_community_path(community), class: "pure-button button-lavender block-button", method: :post %>
+  <% end %>
   <%= link_to "Submit a link", submit_community_path(community), class: "pure-button button-lavender block-button" %>
   <%= link_to "Submit a text post", submit_community_path(community, textpost: "1"), class: "pure-button button-lavender block-button" %>
   <div class="community-desc markdown">

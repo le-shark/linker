@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'static_pages#home'
+
   post 'save', to: 'savings#create'
   delete 'unsave', to: 'savings#destroy'
 
@@ -17,6 +19,7 @@ Rails.application.routes.draw do
     get :saved
   end
   resources :c, controller: 'communities', as: 'communities' do
+    post 'subscribe', to: 'subscription#create', on: :member
     get 'submit', to: 'posts#new', on: :member
     post 'submit', to: 'posts#create', on: :member
     resources :posts do

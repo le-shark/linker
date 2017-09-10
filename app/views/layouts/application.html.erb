@@ -10,10 +10,10 @@
     <div class="pure-g">
       <div class="pure-u-1-6 sidebar">
         <center>
-          <a href="#">
+          <%= link_to root_path do %>
             <%= image_tag "logo.png", class: "logo-sign" %>
             <p class="logo">linker</p>
-          </a>
+          <% end %>
           <p class="weekday">It's <%= weekday %>, <span title="and gals, of course">my dudes</span></p>
         </center>
         <%= yield :sidebar %>

@@ -36,9 +36,9 @@
         <%= link_to comment.user.username, comment.user %> • <%= pluralize comment.score, "point" %>
         <small><%= time_ago_in_words(comment.created_at) %> ago</small>
       </h5>
-      <p>
-        <%= comment.text %>
-      </p>
+      <div class="markdown comment-body">
+        <%= simple_format comment.text %>
+      </div>
       <div class="comment-tools">
         <small>
           <% if @in_post %>
@@ -53,6 +53,7 @@
       </div>
       <div class="reply-form" id="reply-<%= comment.id %>" style="display: none;">
         <%= form_for [comment, Comment.new], html: { class: "pure-form" } do |f| %>
+          <p class="mk-tip">Tip: use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to format your text</p>
           <%= f.text_area :text, placeholder: "Add a Reply", class: "pure-input-1-2 comment-input" %><br/>
           <%= f.submit "Reply"  %>
         <% end %>

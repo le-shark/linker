@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
 before_action :find_commentable
+before_action :logged_in_user
 
   def new
     @comment = Comment.new
@@ -45,5 +46,13 @@ before_action :find_commentable
   def find_commentable
     @commentable = Comment.find_by_id(params[:comment_id]) if params[:comment_id]
     @commentable = Post.find_by_id(params[:post_id]) if params[:post_id]
+  end
+
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:warning] = 'You must be logged in to do that'
+      redirect_to login_url
+    end
   end
 end

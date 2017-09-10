@@ -22,6 +22,10 @@ class User < ApplicationRecord
   has_many :saved_comments, through: :savings, source: :saved_comment
   has_many :posts
   has_many :comments
+  has_many :subscriptions, class_name:  "Subscription",
+                                  foreign_key: "user_id",
+                                  dependent:   :destroy
+  has_many :subscribed_communities, through: :subscriptions, source: :community
   acts_as_voter
 
   def increase_post_karma(count=1)

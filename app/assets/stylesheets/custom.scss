@@ -402,8 +402,11 @@ html, button, input, select, textarea,
   h5 {
     margin: 0 10px;
   }
-  p {
+  p, .comment-body {
     margin: 0 10px;
+    p {
+      margin: 0;
+    }
   }
   a:visited {
     color: inherit;

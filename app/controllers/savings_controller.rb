@@ -1,4 +1,6 @@
 class SavingsController < ApplicationController
+  before_action :logged_in_user
+
   def create
     @saving = Saving.create
     if params[:comment_id]
@@ -31,5 +33,13 @@ class SavingsController < ApplicationController
   private
     def saving_params
       params.require(:saving).permit(:saved_type, :saver_id, :saved_post_id, :saved_comment_id)
+    end
+
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:warning] = 'You must be logged in to do that'
+        redirect_to login_url
+      end
     end
 end

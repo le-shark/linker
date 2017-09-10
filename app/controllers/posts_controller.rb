@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :confirm_logged_in, only: [:new, :create]
+  before_action :logged_in_user, only: [:new, :create, :upvote, :downvote, :gild]
 
   def show
     @post = Post.find(params[:id])
@@ -55,8 +55,11 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :type, :text, :link)
   end
 
-  def confirm_logged_in
-    session[:return_to] ||= request.referer
-    redirect_to session.delete(:return_to) if !logged_in?
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:warning] = 'You must be logged in to do that'
+      redirect_to login_url
+    end
   end
 end

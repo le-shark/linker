@@ -67,9 +67,27 @@ class PostsController < ApplicationController
     redirect_to @community
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+    if @post.update_attributes(post_params_edit)
+      flash[:success] = "Post updated"
+      redirect_to community_post_path(@post.community, @post)
+    else
+      render 'edit'
+    end
+  end
+
   private
   def post_params
     params.require(:post).permit(:title, :type, :text, :link)
+  end
+
+  def post_params_edit
+    params.require(:post).permit(:title, :text, :link)
   end
 
   def logged_in_user

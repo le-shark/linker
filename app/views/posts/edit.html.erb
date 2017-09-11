@@ -1,0 +1,48 @@
+<%= provide(:title, "Edit post") %>
+<% content_for :header do %>
+  <p class="left">
+    Edit
+    <% if params[:textpost] == "1" %>
+      text post
+    <% else %>
+      link
+    <% end %>
+  </p>
+<% end %>
+<%= content_for :sidebar do %>
+  <%= render 'community_sidebar', community: @post.community %>
+<% end %>
+<% if params[:textpost] == "1" %>
+  <%= form_for [@post.community, @post], html: { class: 'pure-form pure-form-stacked' } do |f| %>
+    <%= render "shared/error_messages", object: @post %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :text %>
+    <p class="mk-tip">Tip: use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to format your text</p>
+    <%= f.text_area :text, style: "width: 75%; height: 300px;" %>
+
+    <div class="markdown">
+      <%= simple_format @post.community.rules %>
+    </div>
+
+    <%= f.submit "Save changes", class: "pure-button button-lavender" %>
+  <% end %>
+<% else %>
+  <%= form_for [@post.community, @post], html: { class: 'pure-form pure-form-stacked' } do |f| %>
+    <%= render "shared/error_messages", object: @post %>
+
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+
+    <%= f.label :link %>
+    <%= f.text_field :link %>
+
+    <div class="markdown">
+      <%= simple_format @post.community.rules %>
+    </div>
+
+    <%= f.submit "Save changes", class: "pure-button button-lavender" %>
+  <% end %>
+<% end %>

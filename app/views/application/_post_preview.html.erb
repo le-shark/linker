@@ -46,6 +46,9 @@
       <% end %>
       <% if @from_show %>
         <%= link_to "give gold", community_post_gild_path(post.community ,post), class: "gold-link", method: :put %>
+        <% if current_user && @post.user == current_user %>
+          <%= link_to "edit", edit_community_post_path(post.community, post) %>
+        <% end %>
         <% if current_user && (current_user.admin? || @post.community.moderators.include?(current_user) || @post.user == current_user) %>
           <%= link_to "delete this post", community_post_path(post.community, post), class: "DELET", method: :delete %>
         <% end %>

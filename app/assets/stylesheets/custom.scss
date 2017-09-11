@@ -383,12 +383,18 @@ html, button, input, select, textarea,
 
 .comment-container {
   @include block_shadow;
-  padding: 20px 20px;
+  padding: 20px;
   margin: 0 40px;
   overflow: auto;
   background-color: white;
   margin-top: 10px;
   border: 1px solid #E0E0E0;
+}
+
+.comment-container-reply {
+  @extend .comment-container;
+  padding: 5px;
+  margin: 0 0 0 20px;
 }
 
 .comment-container-saved {

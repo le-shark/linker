@@ -6,8 +6,15 @@
 <% else %>
   <% gray = "" %>
 <% end %>
+<% if depth > 1 %>
+  <% reply = true %>
+<% else %>
+  <% reply = false %>
+<% end %>
 <% if !@in_post %>
   <div class="comment-container-saved">
+<% elsif reply %>
+  <div class="comment-container-reply <%= gray %>">
 <% else %>
   <div class="comment-container <%= gray %>">
 <% end %>

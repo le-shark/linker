@@ -12,6 +12,11 @@ class PostsController < ApplicationController
 
   def gild
     @post = Post.find(params[:post_id])
+    if @post.user.id == current_user.id
+      flash[:warning] = "You can't gild your own posts!"
+      redirect_to request.referer
+      return
+    end
     @post.gild
     flash[:success] = "Let's pretend that you paid $3 to gild this post"
     redirect_to request.referer

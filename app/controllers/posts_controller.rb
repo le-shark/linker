@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     if @post.save
       @post.upvote_by current_user
       flash[:success] = "Successfully submitted a new post!"
-      redirect_to @community
+      redirect_to @post
     else
       render 'new', params: { textpost: params[:textpost] }
     end

@@ -25,6 +25,9 @@
     You can post links and pictures, share your ideas or start a discussion - feel free to check our <%= link_to "community index", communities_path %>!</p>
   <h3>Here are some of our latest posts:</h3>
 <% end %>
+<% if @posts.empty? %>
+  <h4>No posts to display here! <%= link_to "Join one of our communities", communities_path %> or <%= link_to "start your own", new_community_path %>!</h4>
+<% end %>
 <% @posts.each do |post| %>
   <%= render 'post_preview', post: post %>
 <% end %>

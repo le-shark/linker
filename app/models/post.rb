@@ -50,7 +50,7 @@ class Post < ApplicationRecord
   end
 
   def image?
-    self.link.end_with?(".jpg", ".jpeg", ".png")
+    self.link.end_with?(".jpg", ".jpeg", ".png", ".gif")
   end
 
   def link?

@@ -55,6 +55,10 @@ class PostsController < ApplicationController
     redirect_to request.referer
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+  end
+
   private
   def post_params
     params.require(:post).permit(:title, :type, :text, :link)

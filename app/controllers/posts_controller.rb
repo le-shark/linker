@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :create, :upvote, :downvote, :gild]
+  before_action :logged_in_user, only: [:new, :create, :upvote, :downvote, :gild, :destroy]
 
   def show
     @post = Post.find(params[:id])
@@ -57,6 +57,14 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
+    @community = @post.community
+    if current_user.admin? || @post.community.moderators.include?(current_user) || @post.user == current_user
+      @post.delete
+      flash[:success] = "Post deleted"
+    else
+      flash[:warning] = "You are not authorized to do that"
+    end
+    redirect_to @community
   end
 
   private

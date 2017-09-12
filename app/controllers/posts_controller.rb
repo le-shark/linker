@@ -33,8 +33,8 @@ class PostsController < ApplicationController
     @community = Community.find(params[:id])
     @post = @community.posts.build(post_params)
     @post.user = current_user
-    if @post.save!
-      @post.community.bump
+    if @post.save
+      @community.bump
       @post.upvote_by current_user
       flash[:success] = "Successfully submitted a new post!"
       redirect_to community_post_path(@community, @post)

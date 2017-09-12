@@ -40,12 +40,15 @@
         </div>
       </div>
     </div>
+    <%= yield :javascript %>
     <script>
       console.log(he.decode(`<%= params %>`));
+      marked.setOptions({
+        breaks: true
+      });
       document.querySelectorAll('.markdown').forEach((el) => {
         el.innerHTML = marked(el.innerText);
       });
     </script>
-    <%= yield :javascript %>
   </body>
 </html>

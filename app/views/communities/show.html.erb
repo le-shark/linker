@@ -1,6 +1,14 @@
 <%= provide(:title, "#{@community.title}") %>
 <% content_for :header do %>
   <p class="left"><%= @community.title %></p>
+  <div class="pure-menu pure-menu-horizontal sort-posts-menu">
+    <a class="pure-menu-heading pure-menu-link">Sort posts</a>
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><%= link_to "New", community_path(@community, sort: "new"), class: "pure-menu-link" %></li>
+      <li class="pure-menu-item"><%= link_to "Old", community_path(@community, sort: "old"), class: "pure-menu-link" %></li>
+      <li class="pure-menu-item"><%= link_to "Top", community_path(@community, sort: "top"), class: "pure-menu-link" %></li>
+    </ul>
+  </div>
 <% end %>
 <%= content_for :sidebar do %>
   <%= render 'community_sidebar', community: @community %>

@@ -504,7 +504,23 @@ html, button, input, select, textarea,
   margin-left: 40px;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.left {
+  margin: 0 !important;
+}
+
 .comment-pagination {
   display: inline-block;
   width: auto;
+}
+
+.sort-posts-menu {
+  width: auto;
+  margin-bottom: 0;
 }

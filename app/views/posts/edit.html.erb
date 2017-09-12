@@ -12,7 +12,7 @@
 <%= content_for :sidebar do %>
   <%= render 'community_sidebar', community: @post.community %>
 <% end %>
-<% if params[:textpost] == "1" %>
+<% if @post.type == "TextPost" %>
   <%= form_for [@post.community, @post], html: { class: 'pure-form pure-form-stacked' } do |f| %>
     <%= render "shared/error_messages", object: @post %>
 

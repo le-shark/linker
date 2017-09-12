@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910210754) do
+ActiveRecord::Schema.define(version: 20170912072419) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20170910210754) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "cached_votes_total", default: 0
+    t.index ["cached_votes_total"], name: "index_comments_on_cached_votes_total"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -52,6 +54,8 @@ ActiveRecord::Schema.define(version: 20170910210754) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "gold", default: 0
+    t.integer "cached_votes_total", default: 0
+    t.index ["cached_votes_total"], name: "index_posts_on_cached_votes_total"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 

@@ -3,6 +3,13 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    if params[:sort] == "old"
+      @comments = @post.comments.paginate(page: params[:page], per_page: 20).order('created_at ASC')
+    elsif params[:sort] == "top"
+      @comments = @post.comments.paginate(page: params[:page], per_page: 20).order('cached_votes_total DESC')
+    else
+      @comments = @post.comments.paginate(page: params[:page], per_page: 20).order('created_at DESC')
+    end
   end
 
   def new

@@ -28,7 +28,23 @@
 <% end %>
 <% depth = 0 %>
 <%= content_for :comments do %>
-  <%= render partial: 'comments/comment', collection: @post.comments.reverse, locals: { depth: depth + 1 } %>
+<div class="pure-menu pure-menu-horizontal sort-menu">
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item pure-menu-selected pure-menu-has-children pure-menu-allow-hover">
+          <a class="pure-menu-link">Sort replies</a>
+          <ul class="pure-menu-children">
+              <li class="pure-menu-item"><%= link_to "New", community_post_path(@post.community, @post, sort: "new"), class: "pure-menu-link" %></li>
+              <li class="pure-menu-item"><%= link_to "Old", community_post_path(@post.community, @post, sort: "old"), class: "pure-menu-link" %></li>
+              <li class="pure-menu-item"><%= link_to "Top", community_post_path(@post.community, @post, sort: "top"), class: "pure-menu-link" %></li>
+          </ul>
+        </li>
+    </ul>
+</div>
+  <%= render partial: 'comments/comment', collection: @comments, locals: { depth: depth + 1 } %>
+  <br>
+  <div class="content comment-pagination">
+    <%= will_paginate @comments, page_links: false %>
+  </div>
 <% end %>
 <%= content_for :javascript do %>
   <script type="text/javascript">
@@ -39,5 +55,11 @@
         div.style.display = div.style.display === 'none' ? 'block' : 'none';
       });
     });
+    document.querySelector('.previous_page').classList.toggle('pure-button');
+    document.querySelector('.previous_page').classList.toggle('button-lavender');
+    document.querySelector('.previous_page').innerText = "prev";
+    document.querySelector('.next_page').classList.toggle('pure-button');
+    document.querySelector('.next_page').classList.toggle('button-lavender');
+    document.querySelector('.next_page').innerText = "next";
   </script>
 <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912072419) do
+ActiveRecord::Schema.define(version: 20170912182630) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170912072419) do
     t.string "title"
     t.string "small_description"
     t.text "rules"
+    t.datetime "bumped_at"
     t.index ["slug"], name: "index_communities_on_slug", unique: true
   end
 

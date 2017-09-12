@@ -12,11 +12,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def new
-    @community = Community.find(params[:id])
-    @post = Post.new
-  end
-
   def gild
     @post = Post.find(params[:post_id])
     if @post.user.id == current_user.id
@@ -29,11 +24,17 @@ class PostsController < ApplicationController
     redirect_to request.referer
   end
 
+  def new
+    @community = Community.find(params[:id])
+    @post = Post.new
+  end
+
   def create
     @community = Community.find(params[:id])
     @post = @community.posts.build(post_params)
     @post.user = current_user
-    if @post.save
+    if @post.save!
+      @post.community.bump
       @post.upvote_by current_user
       flash[:success] = "Successfully submitted a new post!"
       redirect_to community_post_path(@community, @post)

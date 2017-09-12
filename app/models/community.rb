@@ -15,4 +15,13 @@ class Community < ApplicationRecord
   validates :description, presence: true
   validates :small_description, presence: true, length: { maximum: 255 }
   validates :rules, presence: true
+
+  def subscribers
+    self.subscribed_users.count
+  end
+
+  def bump
+    self.bumped_at = Time.now
+    self.save
+  end
 end

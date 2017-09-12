@@ -12,6 +12,10 @@ class Post < ApplicationRecord
 
   self.per_page = 10
 
+  def bump_community
+    self.community.bump
+  end
+
   def comments_count
     count = 0
     self.comments.each do |c|

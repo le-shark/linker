@@ -4,7 +4,6 @@
 <% end %>
 <%= content_for :sidebar do %>
   <div class="sidebar-main">
-    <h3><%= link_to "Community index", communities_path %></h3>
     <% if current_user %>
       <h3>Your communities:</h3>
       <ul class="comm-list">
@@ -22,19 +21,35 @@
 <% if !current_user %>
   <h2>Welcome to Linker!</h2>
   <p>Linker is a place where people unite into communities based on their interests.
-    You can post links and pictures, share your ideas or start a discussion - feel free to check our <%= link_to "community index", communities_path %>!</p>
-  <h3>Here are some of our latest posts:</h3>
+    You can post links and pictures, share your ideas or start a discussion.</p>
 <% end %>
-<% if @posts.empty? %>
-  <h4>No posts to display here! <%= link_to "Join one of our communities", communities_path %> or <%= link_to "start your own", new_community_path %>!</h4>
-<% end %>
-<% @posts.each do |post| %>
-  <%= render 'post_preview', post: post %>
+<div class="pure-menu pure-menu-horizontal sort-posts-menu">
+  <a class="pure-menu-heading pure-menu-link">Sort communities</a>
+  <ul class="pure-menu-list">
+    <li class="pure-menu-item"><%= link_to "Last post", root_path(sort: "last"), class: "pure-menu-link" %></li>
+    <li class="pure-menu-item"><%= link_to "Subscribers", root_path(sort: "subs"), class: "pure-menu-link" %></li>
+    <li class="pure-menu-item"><%= link_to "New", root_path(sort: "new"), class: "pure-menu-link" %></li>
+    <li class="pure-menu-item"><%= link_to "Old", root_path(sort: "old"), class: "pure-menu-link" %></li>
+    <li class="pure-menu-item"><%= link_to "Name", root_path(sort: "name"), class: "pure-menu-link" %></li>
+  </ul>
+</div>
+<hr>
+<% @communities.each do |c| %>
+  <%= render 'community_preview', community: c %>
 <% end %>
 
-<%= will_paginate @posts, page_links: false %>
+<%= will_paginate @communities, page_links: false %>
 <% content_for :javascript do %>
   <script>
+  function add3Dots(el) {
+    var dots = "...";
+      if(el.innerText.length > 30) {
+        el.innerText = el.innerText.substring(0,30) + dots;
+      }
+    }
+    document.querySelectorAll('.trunc').forEach((el) => {
+      add3Dots(el);
+    });
     document.querySelector('.previous_page').classList.toggle('pure-button');
     document.querySelector('.previous_page').classList.toggle('button-lavender');
     document.querySelector('.previous_page').innerText = "prev";

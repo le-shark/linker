@@ -1,9 +1,16 @@
 class StaticPagesController < ApplicationController
+
   def home
-    if current_user
-      @posts = current_user.feed.paginate(page: params[:page]).order('created_at DESC')
+    if params[:sort] == "name"
+      @communities = Community.all.paginate(page: params[:page], per_page: 30).order('name ASC')
+    elsif params[:sort] == "subs"
+      @communities = Community.all.sort_by(&:subscribers).reverse.paginate(page: params[:page], per_page: 30)
+    elsif params[:sort] == "new"
+      @communities = Community.all.paginate(page: params[:page], per_page: 30).order('created_at DESC')
+    elsif params[:sort] == "old"
+      @communities = Community.all.paginate(page: params[:page], per_page: 30).order('created_at ASC')
     else
-      @posts = Post.all.paginate(page: params[:page]).order('created_at DESC')
+      @communities = Community.all.paginate(page: params[:page], per_page: 30).order('bumped_at DESC')
     end
   end
 end

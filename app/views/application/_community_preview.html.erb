@@ -1,9 +1,21 @@
 <div class="community-preview">
-  <%= link_to community do %>
-    <h3><%= community.title %></h3> - c/<%= community.name %><br>
-  <% end %>
-  <p class="subs"><%= pluralize community.subscribed_users.size, "subscriber" %></p> -
-  <small>a community for <%= time_ago_in_words(community.created_at) %></small>
-  <p><%= community.small_description %></p>
-  <hr>
+  <div class="community-preview-info">
+    <%= link_to community do %>
+      <h3><%= community.title %></h3> - c/<%= community.name %><br>
+    <% end %>
+    <p class="subs"><%= pluralize community.subscribed_users.size, "subscriber" %></p> -
+    <small>a community for <%= time_ago_in_words(community.created_at) %></small>
+    <p><%= community.small_description %></p>
+  </div>
+  <div class="community-preview-post">
+      <div class="c-p-i">
+        <%= gravatar_for(community.posts.last.user, size: 65) %>
+      </div>
+      <div class="community-preview-links">
+        <%= link_to community.posts.last.title, community_post_path(community, community.posts.last), class: "trunc" %>
+        <%= link_to "by #{community.posts.last.user.username}", user_path(community.posts.last.user), class: "trunc" %>
+        <p><%= time_ago_in_words community.posts.last.created_at, class: "trunc" %> ago</p>
+      </div>
+  </div>
 </div>
+<hr>

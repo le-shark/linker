@@ -1,10 +1,6 @@
 class CommunitiesController < ApplicationController
   before_action :logged_in_user, only: [:new, :create]
 
-  def index
-    @communities = Community.all.paginate(page: params[:page], per_page: 10).order('name ASC')
-  end
-
   def show
     @community = Community.find(params[:id])
     if params[:sort] == "old"

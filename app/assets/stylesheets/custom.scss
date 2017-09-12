@@ -484,6 +484,7 @@ html, button, input, select, textarea,
 }
 
 .community-preview {
+  overflow: auto;
   a {
     h3 {
       display: inline;
@@ -495,6 +496,29 @@ html, button, input, select, textarea,
   * {
     margin: 0 0 3px 0 !important;
   }
+}
+
+.community-preview-info {
+  float: left;
+}
+
+.community-preview-post {
+  float: right;
+  a, p {
+    display: block;
+  }
+  width: 350px;
+  display: block;
+  justify-content: space-around;
+}
+
+.c-p-i {
+  float: left;
+}
+
+.community-preview-links {
+  margin-left: 5px !important;
+  float: left;
 }
 
 .DELET {

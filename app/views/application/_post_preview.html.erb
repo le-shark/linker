@@ -9,6 +9,10 @@
     <%= link_to community_post_path(post, community_id: post.community.slug), class: "icon-link" do %>
       <%= image_tag "text.png", class: "text-icon" %>
     <% end %>
+  <% elsif post.video? %>
+    <%= link_to post.link, class: "icon-link" do %>
+      <div class="image-icon" style='background-image: url(https://img.youtube.com/vi/<%= post.vid_id %>/default.jpg);'></div>
+    <% end %>
   <% elsif !post.image? %>
   <%= link_to post.link, class: "icon-link" do %>
     <%= image_tag "link.png", class: "text-icon" %>

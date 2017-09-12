@@ -53,6 +53,16 @@ class Post < ApplicationRecord
     self.link.end_with?(".jpg", ".jpeg", ".png", ".gif")
   end
 
+  def video?
+    video = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
+    !!self.link.match(video)
+  end
+
+  def vid_id
+    id = /(?:.be\/|\/watch\?v=|\/(?=p\/))([\w\/\-]+)/
+    self.link.match(id)[1]
+  end
+
   def link?
     self.type == "Link"
   end

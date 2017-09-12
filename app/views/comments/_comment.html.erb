@@ -40,7 +40,10 @@
     <% end %>
     <div class="comment-main">
       <h5>
-        <%= link_to comment.user.username, comment.user %> • <%= pluralize comment.score, "point" %>
+        <%= link_to comment.user do %>
+          <%= gravatar_for(comment.user, size: 15, classes: "pure-img-eliptical") %>
+          <%= comment.user.username %>
+        <% end %> • <%= pluralize comment.score, "point" %>
         <small><%= time_ago_in_words(comment.created_at) %> ago</small>
       </h5>
       <div class="markdown comment-body">

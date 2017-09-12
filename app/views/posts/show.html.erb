@@ -28,23 +28,27 @@
 <% end %>
 <% depth = 0 %>
 <%= content_for :comments do %>
-<div class="pure-menu pure-menu-horizontal sort-menu">
-    <ul class="pure-menu-list">
-        <li class="pure-menu-item pure-menu-selected pure-menu-has-children pure-menu-allow-hover">
-          <a class="pure-menu-link">Sort replies</a>
-          <ul class="pure-menu-children">
-              <li class="pure-menu-item"><%= link_to "New", community_post_path(@post.community, @post, sort: "new"), class: "pure-menu-link" %></li>
-              <li class="pure-menu-item"><%= link_to "Old", community_post_path(@post.community, @post, sort: "old"), class: "pure-menu-link" %></li>
-              <li class="pure-menu-item"><%= link_to "Top", community_post_path(@post.community, @post, sort: "top"), class: "pure-menu-link" %></li>
-          </ul>
-        </li>
-    </ul>
-</div>
+<% if @comments.any? %>
+  <div class="pure-menu pure-menu-horizontal sort-menu">
+      <ul class="pure-menu-list">
+          <li class="pure-menu-item pure-menu-selected pure-menu-has-children pure-menu-allow-hover">
+            <a class="pure-menu-link">Sort replies</a>
+            <ul class="pure-menu-children">
+                <li class="pure-menu-item"><%= link_to "New", community_post_path(@post.community, @post, sort: "new"), class: "pure-menu-link" %></li>
+                <li class="pure-menu-item"><%= link_to "Old", community_post_path(@post.community, @post, sort: "old"), class: "pure-menu-link" %></li>
+                <li class="pure-menu-item"><%= link_to "Top", community_post_path(@post.community, @post, sort: "top"), class: "pure-menu-link" %></li>
+            </ul>
+          </li>
+      </ul>
+  </div>
+<% end %>
   <%= render partial: 'comments/comment', collection: @comments, locals: { depth: depth + 1 } %>
   <br>
-  <div class="content comment-pagination">
-    <%= will_paginate @comments, page_links: false %>
-  </div>
+  <% if @comments.size == 20 %>
+    <div class="content comment-pagination">
+      <%= will_paginate @comments, page_links: false %>
+    </div>
+  <% end %>
 <% end %>
 <%= content_for :javascript do %>
   <script type="text/javascript">

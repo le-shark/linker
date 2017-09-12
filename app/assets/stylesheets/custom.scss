@@ -53,6 +53,7 @@ html, button, input, select, textarea,
 }
 
 .main {
+  min-height: 100vh;
   background-color: $bg-gray;
 }
 
@@ -526,6 +527,7 @@ html, button, input, select, textarea,
 }
 
 .footer {
+  vertical-align: bottom;
   margin-top: 15px;
   padding: 8px;
 }

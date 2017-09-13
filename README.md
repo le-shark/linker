@@ -8,4 +8,4 @@ Linker is written on Rails 5.1.3 using Ruby version 2.4.0p0. To run linker on yo
 1. Clone this repository
 2. `cd` to the Linker directory
 3. Run `rails s`
-4. Visit [localhost:3000] in your browser
+4. Visit (localhost:3000)[localhost:3000] in your browser

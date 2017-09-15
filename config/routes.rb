@@ -35,4 +35,7 @@ Rails.application.routes.draw do
     put "downvote", to: "comments#downvote", on: :member
     resources :comments
   end
+  resources :conversations do
+    resources :messages
+  end
 end

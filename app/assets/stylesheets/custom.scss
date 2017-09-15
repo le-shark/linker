@@ -561,3 +561,18 @@ html, button, input, select, textarea,
     max-width: 100%;
   }
 }
+
+.new-mail {
+  display: inline;
+  width: 20px;
+}
+
+.new-mail-ntfy {
+  display: inline-flex;
+  align-items: center;
+}
+
+.message-photo {
+  float: left;
+  margin-right: 10px;
+}

@@ -12,6 +12,9 @@
       <span class="sidebar-karma"><%= @user.comment_karma %></span> comment karma
     </p>
     <p title="<%= @user.created_at %>">registered <%= time_ago_in_words @user.created_at %> ago</p>
+    <% if current_user && @user.id != current_user.id %>
+      <%= link_to 'Send me a message', conversations_path(sender_id: current_user.id, recipient_id: @user.id), class: "pure-button pure-button-primary", style: "color: white", method: 'post' %>
+    <% end %>
   </div>
 <% end %>
 <div class="user-page">
@@ -22,9 +25,6 @@
   <% if current_user && current_user.admin? && !current_user?(@user) %>
     <%= link_to "Delete this user", @user, class: "pure-button button-error", method: :delete,
                                            data: { confirm: "You sure?" } %>
-  <% end %>
-  <% if current_user && @user.id != current_user.id %>
-    <%= link_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: 'post' %>
   <% end %>
   <div class="user-posts pure-u-24-24">
     <hr>

@@ -28,6 +28,20 @@ class User < ApplicationRecord
   has_many :subscribed_communities, through: :subscriptions, source: :community
   acts_as_voter
 
+  def new_mail
+    count = 0
+    conversations = Conversation.where("conversations.sender_id = ? OR conversations.recipient_id = ?",
+                     self.id, self.id)
+    if conversations.any?
+      conversations.each do |c|
+        if c.messages.last && !c.messages.last.read && c.messages.last.user_id != self.id
+          count += 1
+        end
+      end
+    end
+    count
+  end
+
   def increase_post_karma(count=1)
     update_attribute(:post_karma, post_karma + count)
   end

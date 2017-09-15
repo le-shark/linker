@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post 'save', to: 'savings#create'
   delete 'unsave', to: 'savings#destroy'
 
+  get 'inbox', to: 'conversations#index'
+
   get 'posts/new'
 
   get 'sessions/new'

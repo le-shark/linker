@@ -2,18 +2,43 @@
 <% content_for :header do %>
   <p class="left">Conversation</p>
 <% end %>
+
 <% @messages.each do |message| %>
   <% if message.text %>
     <% user = User.find(message.user_id) %>
-    <p><%= user.username %></p>
-    <p><%= message.message_time %></p>
-    <p><%= message.text %></p>
-    <p><%= message.read %></p>
+      <div class="comment">
+        <div class="comment-main">
+          <h4>
+            <%= link_to user do %>
+              <%= gravatar_for(user, size: 100, classes: "message-photo") %>
+              <%= user.username %>
+            <% end %>
+            <small><%= message.message_time %></small>
+          </h4>
+          <div class="markdown comment-body">
+            <%= simple_format message.text %>
+          </div>
+        </div>
+      </div>
+      <hr>
   <% end %>
 <% end %>
 
-<%= form_for [@conversation, @message] do |f| %>
-  <%= f.text_area :text, class: "form-control" %>
+<%= will_paginate @posts, page_links: false %>
+
+<%= form_for [@conversation, @message], html: { class: "pure-form-stacked" } do |f| %>
+  <p class="mk-tip">Tip: use <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a> to format your text</p>
+  <%= f.text_area :text, class: "form-control", style: "width: 100%; height: 250px;" %>
   <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-  <%= f.submit "Add Reply" %>
+  <%= f.submit "Send message", class: "pure-button pure-button-primary" %>
+<% end %>
+<% content_for :javascript do %>
+  <script>
+    document.querySelector('.previous_page').classList.toggle('pure-button');
+    document.querySelector('.previous_page').classList.toggle('button-lavender');
+    document.querySelector('.previous_page').innerText = "prev";
+    document.querySelector('.next_page').classList.toggle('pure-button');
+    document.querySelector('.next_page').classList.toggle('button-lavender');
+    document.querySelector('.next_page').innerText = "next";
+  </script>
 <% end %>

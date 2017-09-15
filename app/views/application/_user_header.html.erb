@@ -1,6 +1,16 @@
 <% if logged_in? %>
 <h4 class="user-header-name">
 <div class="pure-menu pure-menu-horizontal">
+  <div class="new-mail-ntfy">
+  <%= link_to inbox_path do %>
+    <% if current_user.new_mail > 0 %>
+      <%= image_tag "mail.png", class: "new-mail" %>
+      <span class="pure-badge-error"><%= current_user.new_mail %></span>
+    <% else %>
+      <%= image_tag "no_mail.png", class: "new-mail" %>
+    <% end %>
+  <% end %>
+  </div>
     <ul class="pure-menu-list">
         <li class="pure-menu-item pure-menu-selected pure-menu-has-children pure-menu-allow-hover">
           <%= link_to current_user, class: "pure-menu-link" do %>

@@ -2,8 +2,34 @@
 <% content_for :header do %>
   <p class="left">Inbox</p>
 <% end %>
+
 <% @conversations.each do |conversation| %>
-  <% if conversation.recipient_id == current_user.id || conversation.sender_id == current_user.id %>
-    here
+<% sender = User.find(conversation.sender_id) %>
+<% recipient = User.find(conversation.recipient_id) %>
+<div class="community-preview">
+  <div class="community-preview-info">
+    <%= link_to conversation_messages_path(conversation) do %>
+      <h4>
+        <%= current_user == sender ? recipient.username : sender.username %>
+        <% if conversation.messages.last && !conversation.messages.last.read && conversation.messages.last.user_id != current_user.id %>
+          - new
+        <% end %>
+      </h4><br>
+    <% end %>
+    <small>started by <%= sender.username %> <%= time_ago_in_words(conversation.created_at) %> ago</small>
+  </div>
+  <% if conversation.messages.last %>
+    <div class="community-preview-post">
+        <div class="c-p-i">
+          <%= gravatar_for(User.find(conversation.messages.last.user_id), size: 65) %>
+        </div>
+        <div class="community-preview-links">
+          Last message
+          <%= link_to "by #{User.find(conversation.messages.last.user_id).username}", user_path(User.find(conversation.messages.last.user_id)), class: "trunc" %>
+          <p><%= time_ago_in_words conversation.messages.last.created_at, class: "trunc" %> ago</p>
+        </div>
+    </div>
   <% end %>
+</div>
+<hr>
 <% end %>

@@ -439,6 +439,9 @@ html, button, input, select, textarea,
   img {
     max-width: 100%;
   }
+  p {
+    margin-bottom: 20px !important;
+  }
 }
 
 .comment-main {
@@ -575,4 +578,19 @@ html, button, input, select, textarea,
 .message-photo {
   float: left;
   margin-right: 10px;
+}
+
+.msg-title {
+  display: inline;
+}
+
+.message-body {
+  p {
+    width: 80%;
+    float: left;
+  }
+}
+
+.msg-divider {
+  visibility: hidden;
 }

@@ -8,15 +8,16 @@
     <% user = User.find(message.user_id) %>
       <div class="comment">
         <div class="comment-main">
-          <h4>
+          <h4 class="msg-title">
             <%= link_to user do %>
               <%= gravatar_for(user, size: 100, classes: "message-photo") %>
               <%= user.username %>
             <% end %>
             <small><%= message.message_time %></small>
           </h4>
-          <div class="markdown comment-body">
-            <%= simple_format message.text %>
+          <hr class="msg-divider">
+          <div class="markdown comment-body message-body">
+            <%= simple_format message.text.gsub("\r\n", "<br />").html_safe %>
           </div>
         </div>
       </div>

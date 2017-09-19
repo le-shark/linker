@@ -7,17 +7,21 @@
   <% if message.text %>
     <% user = User.find(message.user_id) %>
       <div class="comment">
-        <div class="comment-main">
-          <h4 class="msg-title">
-            <%= link_to user do %>
+        <div class="comment-main message-main">
+          <div class="msg-photo">
+            <%= link_to user, class: "msg-photo-link" do %>
               <%= gravatar_for(user, size: 100, classes: "message-photo") %>
-              <%= user.username %>
             <% end %>
-            <small><%= message.message_time %></small>
-          </h4>
-          <hr class="msg-divider">
-          <div class="markdown comment-body message-body">
-            <%= simple_format message.text.gsub("\r\n", "<br />").html_safe %>
+          </div>
+          <div class="msg-not-photo">
+            <h4 class="msg-title">
+              <%= user.username %>
+              <small><%= message.message_time %></small>
+            </h4>
+            <hr class="msg-divider">
+            <div class="markdown comment-body message-body">
+              <%= simple_format message.text.gsub("\r\n", "<br />").html_safe %>
+            </div>
           </div>
         </div>
       </div>

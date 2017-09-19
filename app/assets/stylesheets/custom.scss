@@ -584,13 +584,20 @@ html, button, input, select, textarea,
   display: inline;
 }
 
-.message-body {
-  p {
-    width: 80%;
-    float: left;
-  }
-}
 
 .msg-divider {
   visibility: hidden;
+}
+
+.msg-photo-link {
+  display: inline-block;
+  overflow: auto;
+}
+
+.msg-not-photo {
+  display: inline-block;
+}
+
+.message-main {
+  display: flex;
 }
